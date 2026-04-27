@@ -7,4 +7,4 @@ Contém estudos sobre temas diversos que despertaram meu interesse
 Cada pasta contém o notebook da análise e os dados correspondentes utilizados.
 
 
-https://raw.githubusercontent.com/Marcelao98/data-notebooks/main/EDA_GASOLINA_BRASIL/MIDIA/TEMPORAL_BRASIL.jpg
+![Preço gasolina](https://raw.githubusercontent.com/Marcelao98/data-notebooks/main/EDA_GASOLINA_BRASIL/MIDIA/TEMPORAL_BRASIL.jpg)
