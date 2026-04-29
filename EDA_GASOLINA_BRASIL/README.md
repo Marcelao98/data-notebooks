@@ -25,10 +25,8 @@ O lag varia de 1 a 10 dias entre os estados — sem padrão geográfico claro, s
 
 ## Visualizações
 
-![Desvio por estado](midia/mapa_desvio.png)
-
+![Desvio por estado](midia/MAPA_DESVIO_2022_06.jpg)
 ![Distribuição por estado](images/boxplot_estados.png)
-
 ![Lag de repasse por estado](images/lag_estados_bar.png)
 
 ---
