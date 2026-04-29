@@ -26,27 +26,25 @@ O lag varia de 1 a 10 dias entre os estados — sem padrão geográfico claro, s
 ## Visualizações
 
 ![Desvio por estado](midia/MAPA_DESVIO_2022_06.jpg)
-![Distribuição por estado](images/boxplot_estados.png)
-![Lag de repasse por estado](images/lag_estados_bar.png)
+![Distribuição por estado](midia/boxplot_marco_2026.jpg)
 
 ---
 
 ## Estrutura do Repositório
 
 ```
-├── 01_data_preparation.ipynb   # Coleta e limpeza dos dados brutos da ANP
-├── 02_analysis.ipynb           # Análise exploratória completa
+├── 02_eda_gasolina.ipynb           # Análise exploratória completa
 ├── images/                     # Visualizações estáticas
-└── data/                       # Instruções para reproduzir o dataset
+└── data/                       # Informações sobre as fontes dos dados
 ```
 
 ---
 
 ## Como Reproduzir
 
-1. Baixe os dados em [gov.br/anp](https://www.gov.br/anp) — Série Histórica de Preços de Combustíveis
-2. Execute `01_data_preparation.ipynb` para gerar o dataset limpo
-3. Execute `02_analysis.ipynb` para a análise completa
+Baixe os dados no Kaggle: https://www.kaggle.com/datasets/marceloeduardo98/brazilian-gasoline-prices2022-2026
+Coloque o arquivo na pasta data do repositório
+Execute o notebook 01_eda_gasolina.ipynb para reproduzir a análise
 
 ---
 
