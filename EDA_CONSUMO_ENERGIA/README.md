@@ -55,14 +55,14 @@ Análise da dinâmica intradiária do Sistema Interligado Nacional. O foco não 
 
 ---
 
-### 03 — Correlação Temperatura × Consumo *(em construção)*
+### 03 — Correlação Temperatura × Consumo 
 **Dados:** ONS + INMET (dados meteorológicos horários)
 
 Quantificação da relação entre temperatura e consumo de carga. A análise vai além do óbvio — explorando assimetria da resposta (calor vs. frio), threshold de temperatura, defasagem temporal e variação do coeficiente de correlação por hora do dia e por região.
 
 ---
 
-### 04 — Modelo Preditivo XGBoost *(em construção)*
+### 04 — Modelo Preditivo XGBoost *
 **Dados:** ONS + INMET + variáveis de calendário
 
 Previsão de carga horária com XGBoost, comparando três abordagens: regressão linear (baseline), Seasonal Naive e XGBoost com features de calendário, lags e temperatura. Validação com TimeSeriesSplit para garantir integridade temporal.
