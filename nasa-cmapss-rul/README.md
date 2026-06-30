@@ -38,7 +38,7 @@ A correção da normalização e da estratégia de predição no conjunto de tes
 |---|---|---|
 | Regressão Linear | 19.60 | 906.49 |
 | XGBoost | 17.78 | 766.51 |
-| LSTM | 13.52 | 332.35 |
+| LSTM | 14.02 | 332.35 |
 
 O LSTM superou os modelos tabulares ao aprender diretamente a dinâmica temporal dos sensores, sem depender de rolling features pré-calculadas.
 
