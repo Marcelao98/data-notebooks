@@ -27,47 +27,67 @@ analise-energia/
 ## 📊 Notebooks
 
 ### 01 — Consumo Mensal (1994–2023)
-**Dados:** EPE — Empresa de Pesquisa Energética  
-**Período:** ~20 anos de consumo mensal por segmento e região
 
-Análise de longo prazo do consumo de energia elétrica no Brasil. Aplica decomposição STL para separar tendência, sazonalidade e resíduo — usando os resíduos como detector de eventos históricos.
+**Dados:** EPE — Empresa de Pesquisa Energética
+**Período:** ~20 anos de consumo mensal por segmento e região.
+
+Análise de longo prazo do consumo de energia elétrica no Brasil. Utiliza decomposição STL para separar tendência, sazonalidade e resíduo, empregando os resíduos como detector de eventos históricos que impactaram o sistema elétrico.
 
 **Principais achados:**
-- O Brasil não tem uma sazonalidade única: Sul/Sudeste consomem mais no verão; Norte/Nordeste, no segundo semestre
-- A crise de 2008 afetou quase exclusivamente o setor industrial; o residencial mal sentiu
-- O embargo ambiental da **Alunorte (2018)** derrubou o consumo do Pará em ~20% por mais de um ano — visível na tendência de toda a Região Norte
-- O COVID (2020) aparece sincronizado em todas as regiões, com o setor comercial registrando a maior queda da série histórica
+
+* O Brasil não possui uma sazonalidade única: Sul e Sudeste apresentam maior consumo no verão, enquanto Norte e Nordeste concentram maior demanda no segundo semestre.
+* A crise financeira de 2008 impactou principalmente o setor industrial; o consumo residencial permaneceu praticamente estável.
+* O embargo ambiental da Alunorte (2018) reduziu o consumo do Pará em aproximadamente 20% por mais de um ano, alterando a tendência de toda a Região Norte.
+* A pandemia de COVID-19 (2020) aparece de forma sincronizada em todas as regiões, com o setor comercial registrando a maior queda da série histórica.
 
 ---
 
 ### 02 — Carga Horária do SIN (2019–2026)
-**Dados:** ONS — Operador Nacional do Sistema Elétrico  
-**Período:** Dados horários dos quatro subsistemas (Norte, Nordeste, Sudeste, Sul)
 
-Análise da dinâmica intradiária do Sistema Interligado Nacional. O foco não é *quanto* se consome, mas *quando* — e como esse padrão varia por região, dia da semana, mês e ano.
+**Dados:** ONS — Operador Nacional do Sistema Elétrico
+**Período:** Dados horários dos quatro subsistemas (Norte, Nordeste, Sudeste e Sul).
+
+Análise da dinâmica intradiária do Sistema Interligado Nacional. O foco não é apenas quanto se consome, mas quando e como esse comportamento varia entre regiões, dias da semana e estações do ano.
 
 **Principais achados:**
-- O vale ocorre entre 3h–5h (sistema no limite mínimo); o pico entre 18h–19h (indústria + residencial simultâneos)
-- A dispersão do consumo é máxima entre 10h–16h — o horário mais difícil de prever
-- Dia útil e fim de semana produzem dois sistemas diferentes: o platô industrial desaparece no domingo, mas o pico noturno persiste
-- O **Nordeste** mostra a *duck curve* se aprofundando ano a ano (2019→2026): assinatura direta da expansão solar fotovoltaica
-- O **apagão de outubro de 2025** (subestação Bateias/PR) e a **Sexta-Feira Santa** aparecem como anomalias claras no z-score do resíduo
+
+* O vale diário ocorre entre 3h e 5h, enquanto o pico acontece entre 18h e 19h.
+* A maior variabilidade do consumo concentra-se entre 10h e 16h, tornando esse intervalo o mais difícil de prever.
+* Dias úteis e finais de semana apresentam perfis de carga completamente distintos: o platô industrial praticamente desaparece aos domingos.
+* O Nordeste apresenta uma duck curve cada vez mais acentuada entre 2019 e 2026, refletindo a expansão da geração solar fotovoltaica.
+* Eventos como o apagão de outubro de 2025 e a Sexta-Feira Santa aparecem claramente como anomalias na série temporal.
 
 ---
 
-### 03 — Correlação Temperatura × Consumo 
-**Dados:** ONS + INMET (dados meteorológicos horários)
+### 03 — Temperatura × Consumo de Energia
 
-Quantificação da relação entre temperatura e consumo de carga. A análise vai além do óbvio — explorando assimetria da resposta (calor vs. frio), threshold de temperatura, defasagem temporal e variação do coeficiente de correlação por hora do dia e por região.
+**Dados:** ONS + INMET (dados meteorológicos horários).
+
+Investigação da influência da temperatura sobre a carga elétrica, explorando efeitos de defasagem temporal, diferenças regionais, assimetrias entre calor e frio e variações ao longo do dia.
+
+**Principais achados:**
+
+* A maior correlação entre temperatura e consumo ocorre durante a madrugada, quando menos fatores externos interferem na demanda.
+* A temperatura observada de 2 a 3 horas antes explica melhor a carga atual do que a temperatura instantânea, evidenciando a existência de inércia térmica.
+* O impacto da temperatura varia entre os subsistemas: no Sul, dias excepcionalmente quentes podem reduzir o consumo ao diminuir a necessidade de aquecimento elétrico durante o inverno.
+* Os resultados mostraram que a temperatura deve ser tratada como uma variável dinâmica, incorporando lags e interações com horário e dia da semana para representar adequadamente seu efeito sobre o consumo.
 
 ---
 
-### 04 — Modelo Preditivo XGBoost *
-**Dados:** ONS + INMET + variáveis de calendário
+### 04 — Previsão de Carga com XGBoost
 
-Previsão de carga horária com XGBoost, comparando três abordagens: regressão linear (baseline), Seasonal Naive e XGBoost com features de calendário, lags e temperatura. Validação com TimeSeriesSplit para garantir integridade temporal.
+**Dados:** ONS + INMET + variáveis de calendário.
 
----
+Construção de um modelo preditivo para estimar a carga horária do Sistema Interligado Nacional, comparando três abordagens: Regressão Linear, Seasonal Naive e XGBoost, utilizando validação temporal com TimeSeriesSplit.
+
+**Principais achados:**
+
+* O XGBoost alcançou **MAPE médio de 2,77%**, reduzindo significativamente o erro em relação aos modelos de referência.
+* O Seasonal Naive mostrou que a sazonalidade semanal explica boa parte da demanda, mas apresenta limitações em feriados e eventos climáticos atípicos.
+* A Regressão Linear melhorou o desempenho ao incorporar temperatura e calendário, mas não conseguiu capturar relações não lineares entre as variáveis.
+* O XGBoost aprendeu essas interações automaticamente, tornando-se o modelo com melhor desempenho em todos os subsistemas.
+* A análise de importância das variáveis confirmou os resultados obtidos nas etapas exploratórias: os lags de carga foram as variáveis mais relevantes, enquanto a temperatura defasada em três horas apresentou maior importância do que a temperatura instantânea, validando empiricamente o efeito de inércia térmica observado anteriormente.
+
 
 ## 🛠️ Stack Técnica
 
@@ -86,6 +106,9 @@ Previsão de carga horária com XGBoost, comparando três abordagens: regressão
 - **EPE** — [Consumo de Energia Elétrica](https://www.epe.gov.br/pt/publicacoes-dados-abertos/publicacoes/consumo-de-energia-eletrica)
 - **ONS** — [Curva de Carga Horária](https://dados.ons.org.br/dataset/curva-carga-ho)
 - **INMET** — [Dados Meteorológicos](https://bdmep.inmet.gov.br/) *(notebook 03)*
+
+
+
 
 ---
 
